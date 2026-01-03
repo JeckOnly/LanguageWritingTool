@@ -1,0 +1,26 @@
+package com.example.demo
+
+import kotlinx.serialization.json.Json
+
+object JsonExtract {
+    private val json = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+    }
+
+    fun parseCorrectionResult(modelText: String): CorrectionResult {
+        // 很多本地模型偶尔会“夹带”一些说明文字，这里做个容错：截取第一个 { 到最后一个 }。
+        val trimmed = modelText.trim()
+        val start = trimmed.indexOf('{')
+        val end = trimmed.lastIndexOf('}')
+        require(start >= 0 && end > start) { "Model did not return JSON. Raw: $trimmed" }
+
+        val jsonText = trimmed.substring(start, end + 1)
+        val payload = json.decodeFromString<CorrectionPayload>(CorrectionPayload.serializer(), jsonText)
+        return CorrectionResult(
+            rewritten = payload.rewritten,
+            alternatives = payload.alternatives,
+            notes = payload.notes
+        )
+    }
+}
