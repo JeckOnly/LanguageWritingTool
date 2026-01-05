@@ -1,27 +1,35 @@
 package com.example.demo
 
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.demo.di.initKoin
 import com.example.demo.domain.CheckEnglishUseCase
+import com.example.demo.domain.viewmodel.MainViewModel
+import org.koin.core.context.GlobalContext.get
 import org.koin.core.context.GlobalContext.stopKoin
 import org.koin.java.KoinJavaComponent.getKoin
 
 fun main() = application {
-
     initKoin()
 
-    // 2) 取出 MainViewModel
-    val vm: MainViewModel = getKoin().get()
-
     Window(
-        onCloseRequest = {
-            vm.cancel()       // 你已有的 cancel/close
-            stopKoin()        // 可选：退出时关闭 Koin
-            exitApplication()
-        },
+        onCloseRequest = ::exitApplication,
         title = "English Fixer (Local LLM)"
     ) {
+        val vm: MainViewModel = viewModel {
+            MainViewModel(getKoin().get(), getKoin().get())
+        }
+
+        // 关窗时做清理（比把 vm 放到 onCloseRequest 更自然）
+        DisposableEffect(Unit) {
+            onDispose {
+                vm.cancel()
+                stopKoin()
+            }
+        }
+
         App(vm)
     }
 }

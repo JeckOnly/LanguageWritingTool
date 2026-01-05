@@ -10,6 +10,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.unit.dp
+import com.example.demo.domain.viewmodel.MainViewModel
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun App(vm: MainViewModel) {
@@ -168,4 +170,10 @@ private fun ModeChipRow(current: CheckMode, onChange: (CheckMode) -> Unit) {
             label = { Text("Concise") }
         )
     }
+}
+
+@Preview
+@Composable
+fun PreviewModeChipRow() {
+    ModeChipRow(CheckMode.RewriteNatural) {}
 }

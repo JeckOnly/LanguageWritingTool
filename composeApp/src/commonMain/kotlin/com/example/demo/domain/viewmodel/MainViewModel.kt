@@ -1,28 +1,24 @@
-package com.example.demo
+package com.example.demo.domain.viewmodel
 
+import androidx.lifecycle.ViewModel
+import com.example.demo.CheckMode
 import com.example.demo.data.AiConfigStore
 import com.example.demo.domain.CheckEnglishUseCase
-import kotlinx.coroutines.*
+import com.example.demo.state.UiState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-
-data class UiState(
-    val baseUrl: String = "http://localhost:1234/v1", // LM Studio 默认:contentReference[oaicite:6]{index=6}
-    val model: String = "qwen2.5-vl-3b-instruct",
-    val contextText: String = "",
-    val draftText: String = "",
-    val mode: CheckMode = CheckMode.RewriteNatural,
-
-    val isLoading: Boolean = false,
-    val result: CorrectionResult? = null,
-    val error: String? = null
-)
+import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 class MainViewModel(
     private val useCase: CheckEnglishUseCase,
     private val configStore: AiConfigStore
-) {
+): ViewModel() {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private var job: Job? = null
 

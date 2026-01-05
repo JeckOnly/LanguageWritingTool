@@ -10,7 +10,6 @@ import org.koin.dsl.module
 val desktopModule = module {
     single { AiConfigStore(AiConfig(baseUrl = "http://localhost:1234/v1", model = "qwen2.5-vl-3b-instruct")) }
     single { buildDesktopHttpClient(get()) }  // HttpClient
-    factory { MainViewModel(get(), get()) }
     // 你还可以在这 bind UseCase、ViewModel 等
 }
 
