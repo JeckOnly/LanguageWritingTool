@@ -1,8 +1,5 @@
 package com.example.demo.di
 
-import com.example.demo.*
-import com.example.demo.data.AiConfig
-import com.example.demo.data.AiConfigStore
 import com.example.demo.network.buildDesktopHttpClient
 import org.koin.core.context.startKoin
 import org.koin.dsl.module

@@ -1,5 +1,7 @@
 package com.example.demo
 
+import com.example.demo.data.repo.CheckMode
+
 object PromptBuilder {
 
     fun buildSystemPrompt(mode: CheckMode): String {

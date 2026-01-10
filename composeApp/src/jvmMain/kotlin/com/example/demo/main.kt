@@ -5,9 +5,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.demo.di.initKoin
-import com.example.demo.domain.CheckEnglishUseCase
-import com.example.demo.domain.viewmodel.MainViewModel
-import org.koin.core.context.GlobalContext.get
+import com.example.demo.presentation.viewmodel.MainViewModel
 import org.koin.core.context.GlobalContext.stopKoin
 import org.koin.java.KoinJavaComponent.getKoin
 

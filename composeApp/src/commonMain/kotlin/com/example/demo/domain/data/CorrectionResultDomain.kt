@@ -1,10 +1,9 @@
-package com.example.demo
+package com.example.demo.domain.data
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CorrectionResult(
+data class CorrectionResultDomain(
     val rewritten: String,
     val alternatives: List<String> = emptyList(),
     val notes: List<String> = emptyList()

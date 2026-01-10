@@ -1,4 +1,4 @@
-package com.example.demo.data
+package com.example.demo.presentation
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -9,6 +9,7 @@ data class AiConfig(
     val apiKey: String? = null
 )
 
+// TODO: should save in database
 class AiConfigStore(initial: AiConfig) {
     private val _config = MutableStateFlow(initial)
     val config: StateFlow<AiConfig> = _config

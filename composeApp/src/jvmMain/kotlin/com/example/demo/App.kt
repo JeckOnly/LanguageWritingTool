@@ -10,7 +10,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.unit.dp
-import com.example.demo.domain.viewmodel.MainViewModel
+import com.example.demo.data.repo.CheckMode
+import com.example.demo.presentation.viewmodel.MainViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -104,9 +105,8 @@ fun App(vm: MainViewModel) {
                         Spacer(Modifier.height(8.dp))
                     }
 
-                    val result = s.result
                     OutlinedTextField(
-                        value = result?.rewritten.orEmpty(),
+                        value = s.rewritten.orEmpty(),
                         onValueChange = {},
                         readOnly = true,
                         modifier = Modifier.weight(1f).fillMaxWidth(),
@@ -118,7 +118,7 @@ fun App(vm: MainViewModel) {
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(
                             onClick = vm::applyRewriteToDraft,
-                            enabled = !result?.rewritten.isNullOrBlank()
+                            enabled = s.rewritten.isBlank()
                         ) { Text("Apply to Draft") }
 
                         OutlinedButton(
@@ -131,7 +131,7 @@ fun App(vm: MainViewModel) {
 
                     Text("Alternatives", style = MaterialTheme.typography.titleSmall)
                     LazyColumn(Modifier.fillMaxWidth().heightIn(max = 160.dp)) {
-                        items(result?.alternatives ?: emptyList()) { alt ->
+                        items(s.alternatives) { alt ->
                             AssistChip(
                                 onClick = { vm.setDraft(alt); },
                                 label = { Text(alt) },
@@ -140,10 +140,10 @@ fun App(vm: MainViewModel) {
                         }
                     }
 
-                    if (!result?.notes.isNullOrEmpty()) {
+                    if (s.notes.isNotEmpty()) {
                         Spacer(Modifier.height(8.dp))
                         Text("Notes", style = MaterialTheme.typography.titleSmall)
-                        result!!.notes.forEach { Text("• $it") }
+                        s.notes.forEach { Text("• $it") }
                     }
                 }
             }

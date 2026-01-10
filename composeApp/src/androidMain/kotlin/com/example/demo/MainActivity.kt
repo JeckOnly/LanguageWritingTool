@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.demo.domain.viewmodel.MainViewModel
+import com.example.demo.presentation.viewmodel.MainViewModel
 
 class MainActivity : ComponentActivity() {
 
