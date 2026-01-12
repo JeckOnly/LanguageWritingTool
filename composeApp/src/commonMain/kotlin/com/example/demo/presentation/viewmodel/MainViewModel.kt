@@ -77,10 +77,33 @@ class MainViewModel(
 
     fun setMode(m: CheckMode) = _state.update { it.copy(mode = m) }
 
+    fun toggleTheme() {
+        _state.update { it.copy(isDarkTheme = !it.isDarkTheme) }
+    }
+
+
     fun applyRewriteToDraft() {
         val rewritten = _state.value.rewritten.trim()
         if (rewritten.isNotEmpty()) {
             _state.update { it.copy(draftText = rewritten) }
+        }
+    }
+
+    fun addRewriteToContext() {
+        _state.update { s ->
+            val rewrite = s.rewritten.trim()
+            if (rewrite.isBlank()) return@update s
+
+            val ctx = s.contextText.trimEnd()
+
+            val newCtx = when {
+                ctx.isBlank() -> rewrite
+                ctx.endsWith("\n\n") -> ctx + rewrite
+                ctx.endsWith("\n") -> ctx + "\n" + rewrite
+                else -> ctx + "\n\n" + rewrite
+            }
+
+            s.copy(contextText = newCtx)
         }
     }
 

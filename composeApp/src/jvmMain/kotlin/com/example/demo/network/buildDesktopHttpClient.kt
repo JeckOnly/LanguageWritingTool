@@ -25,8 +25,8 @@ fun buildDesktopHttpClient(json: Json): HttpClient {
 
         install(HttpTimeout) {
             connectTimeoutMillis = 5_000
-            requestTimeoutMillis = 5_000
-            socketTimeoutMillis = 5_000
+            requestTimeoutMillis = 20_000
+            socketTimeoutMillis = 20_000
         }
     }
 }
