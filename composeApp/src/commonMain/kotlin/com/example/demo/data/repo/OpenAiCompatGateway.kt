@@ -30,6 +30,7 @@ class OpenAiCompatGateway(
         draftText: String,
         mode: CheckMode
     ): DataResult<CorrectionResultData, CEEnglishDataError> {
+        print("contextText: $contextText, draftText: $draftText, mode: $mode")
 
         val cfg = configStore.config.value
         val url = cfg.baseUrl.trimEnd('/') + "/chat/completions"
@@ -38,8 +39,12 @@ class OpenAiCompatGateway(
             model = cfg.model,
             temperature = 0.2,
             messages = listOf(
-                Message(role = "system", content = PromptBuilder.buildSystemPrompt(mode)),
-                Message(role = "user", content = PromptBuilder.buildUserContent(contextText, draftText))
+                Message(role = "system", content = PromptBuilder.buildSystemPrompt(mode).also {
+                    print("system message: $it")
+                }),
+                Message(role = "user", content = PromptBuilder.buildUserContent(contextText, draftText).also {
+                    print("user content: $it")
+                })
             )
         )
 

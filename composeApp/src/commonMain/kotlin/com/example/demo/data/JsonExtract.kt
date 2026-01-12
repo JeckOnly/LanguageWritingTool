@@ -23,7 +23,6 @@ object JsonExtract {
         return CorrectionResultData(
             rewritten = payload.rewritten,
             alternatives = payload.alternatives,
-            notes = payload.notes
         )
     }
 }

@@ -133,7 +133,6 @@ class MainViewModel(
                                 isLoading = false,
                                 rewritten = data.rewritten,
                                 alternatives = data.alternatives,
-                                notes = data.notes,
                                 error = null
                             )
                         }

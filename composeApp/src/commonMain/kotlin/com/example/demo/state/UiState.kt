@@ -13,6 +13,5 @@ data class UiState(
     val isLoading: Boolean = false,
     val rewritten: String = "",
     val alternatives: List<String> = emptyList(),
-    val notes: List<String> = emptyList(),
     val error: String? = null
 )

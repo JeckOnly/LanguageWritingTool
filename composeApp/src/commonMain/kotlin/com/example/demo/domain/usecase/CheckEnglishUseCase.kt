@@ -40,7 +40,6 @@ class CheckEnglishUseCase(
                     emit(Result.Success(CESuccess(CorrectionResultDomain(
                         rewritten = result.data.rewritten,
                         alternatives = result.data.alternatives,
-                        notes = result.data.notes,
                     ))))
                 }
             }

@@ -37,7 +37,6 @@ JSON format:
 {
   "rewritten": "...",
   "alternatives": ["...", "...", "..."],
-  "notes": ["short note 1", "short note 2"]
 }
 
 Rules:
@@ -51,10 +50,10 @@ Rules:
     fun buildUserContent(contextText: String, draftText: String): String {
         return """
 CONTEXT (already written, for reference only):
-${contextText.trim()}
+"${contextText.trim()}"
 
 DRAFT (may contain Chinese, rewrite into proper English):
-${draftText.trim()}
+"${draftText.trim()}"
         """.trimIndent()
     }
 }

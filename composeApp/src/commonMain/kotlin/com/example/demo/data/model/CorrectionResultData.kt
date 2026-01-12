@@ -7,5 +7,4 @@ import kotlinx.serialization.Serializable
 data class CorrectionResultData(
     val rewritten: String,
     val alternatives: List<String> = emptyList(),
-    val notes: List<String> = emptyList()
 )

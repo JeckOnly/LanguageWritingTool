@@ -140,11 +140,6 @@ fun App(vm: MainViewModel) {
                         }
                     }
 
-                    if (s.notes.isNotEmpty()) {
-                        Spacer(Modifier.height(8.dp))
-                        Text("Notes", style = MaterialTheme.typography.titleSmall)
-                        s.notes.forEach { Text("• $it") }
-                    }
                 }
             }
         }
