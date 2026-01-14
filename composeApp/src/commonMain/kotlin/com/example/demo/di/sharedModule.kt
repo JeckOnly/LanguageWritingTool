@@ -17,7 +17,7 @@ private val MainDispatcher = named("MainDispatcher")
 
 
 val sharedModule: Module = module {
-    single { AiConfigStore(AiConfig(baseUrl = "http://localhost:1234/v1", model = "qwen2.5-vl-3b-instruct")) }
+    single { AiConfigStore(AiConfig(baseUrl = "http://localhost:1234/v1", model = "qwen2.5-7b-instruct:2")) }
     single {
         Json { ignoreUnknownKeys = true; isLenient = true }
     }

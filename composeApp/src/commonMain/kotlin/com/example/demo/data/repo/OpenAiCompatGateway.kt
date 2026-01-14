@@ -37,7 +37,7 @@ class OpenAiCompatGateway(
 
         val reqBody = ChatCompletionsRequest(
             model = cfg.model,
-            temperature = 0.2,
+            temperature = 0.4,
             messages = listOf(
                 Message(role = "system", content = PromptBuilder.buildSystemPrompt(mode).also {
                     print("system message: $it")
