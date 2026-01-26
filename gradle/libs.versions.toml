@@ -17,6 +17,7 @@ kotlin = "2.3.0"
 kotlinx-coroutines = "1.10.2"
 kotlinxSerializationJson = "1.9.0"
 ktorClientCore = "3.3.3"
+detekt = "1.23.6"
 
 [libraries]
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
@@ -45,3 +46,4 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

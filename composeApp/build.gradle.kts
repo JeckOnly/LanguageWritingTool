@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -8,6 +10,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.detekt)
 
 }
 
@@ -111,4 +114,18 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+extensions.configure<DetektExtension> {
+    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
+    buildUponDefaultConfig = false   // ✅ 关键：别加载默认规则
+    allRules = false
+}
+
+// run ./gradlew :composeApp:detekt
+tasks.withType<Detekt>().configureEach {
+    setSource(files(projectDir))
+
+    include("**/*.kt")
+    exclude("**/build/**")
 }
